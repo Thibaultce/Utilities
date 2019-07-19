@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28902.138
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.SendGrid", "Utilities.SendGrid\Utilities.SendGrid.csproj", "{606D7414-A4E1-4339-8EA4-78DEABA28765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.SendGrid", "Utilities.SendGrid\Utilities.SendGrid.csproj", "{606D7414-A4E1-4339-8EA4-78DEABA28765}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities.Smtp", "Utilities.Smtp\Utilities.Smtp.csproj", "{E9373A95-D8FA-496E-A1C4-F99FE6C8F8B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.SendGrid.Spammer", "Utilities.SendGrid.Spammer\Utilities.SendGrid.Spammer.csproj", "{8ABA0D19-9515-40C2-82E6-486C9488C3FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{606D7414-A4E1-4339-8EA4-78DEABA28765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{606D7414-A4E1-4339-8EA4-78DEABA28765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{606D7414-A4E1-4339-8EA4-78DEABA28765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9373A95-D8FA-496E-A1C4-F99FE6C8F8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9373A95-D8FA-496E-A1C4-F99FE6C8F8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9373A95-D8FA-496E-A1C4-F99FE6C8F8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9373A95-D8FA-496E-A1C4-F99FE6C8F8B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ABA0D19-9515-40C2-82E6-486C9488C3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABA0D19-9515-40C2-82E6-486C9488C3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABA0D19-9515-40C2-82E6-486C9488C3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABA0D19-9515-40C2-82E6-486C9488C3FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
