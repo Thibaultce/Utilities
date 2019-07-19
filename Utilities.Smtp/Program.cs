@@ -36,6 +36,8 @@ namespace Utilities.Smtp
                 })
                 {
                     msg.To.Add(config["Email:To"]);
+                    msg.CC.Add(config["Email:Cc"]);
+                    msg.Bcc.Add(config["Email:Bcc"]);
 
                     await smtpClient.SendMailAsync(msg).ConfigureAwait(false);
                 }
