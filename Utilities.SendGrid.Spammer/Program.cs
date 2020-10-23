@@ -25,7 +25,7 @@ namespace Utilities.SendGrid.Spammer
                 List<string> tos = new List<string>();
                 if (!string.IsNullOrWhiteSpace(config["Email:Destination:csv"]) && File.Exists(config["Email:Destination:csv"]))
                 {
-                    using (var reader = new StreamReader(config["Destination:csv"]))
+                    using (var reader = new StreamReader(config["Email:Destination:csv"]))
                     {
                         while (!reader.EndOfStream)
                         {
@@ -37,7 +37,7 @@ namespace Utilities.SendGrid.Spammer
                 }
                 else
                 {
-                    tos.Add(config["Destination:To"]);
+                    tos.Add(config["Email:Destination:To"]);
                 }
                 var client = new SendGridClient(config["SendGrid:Key"]);
 

@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
 using System;
 using System.IO;
-using System.Net;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,29 +19,35 @@ namespace Utilities.Smtp
 
             try
             {
-                using (var smtpClient = new SmtpClient(config["Smtp:Server"])
-                {
-                    Credentials = !string.IsNullOrWhiteSpace(config["Smtp:Username"]) ? new NetworkCredential(config["Smtp:Username"], config["Smtp:Password"]) : null,
-                    Port = int.Parse(config["Smtp:Port"]),
-                    EnableSsl = bool.Parse(config["Smtp:Ssl"])
-                })
-                using (var msg = new MailMessage
-                {
-                    Body = File.ReadAllText(@"c:\temp\email.html", Encoding.UTF8),
-                    From = new MailAddress(config["Email:From"]),
-                    Subject = config["Email:Subject"],
-                    IsBodyHtml = true,
-                    DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure,
-                    
-                })
-                {
-                    msg.To.Add(config["Email:To"]);
-                    msg.CC.Add(config["Email:Cc"]);
-                    msg.Bcc.Add(config["Email:Bcc"]);
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(config["Smtp:Username"]));
+                message.To.Add(new MailboxAddress(config["Email:To"]));
+                message.Subject = "How you doin'?";
 
-                    await smtpClient.SendMailAsync(msg).ConfigureAwait(false);
+                message.Body = new TextPart("plain")
+                {
+                    Text = @"Hey Chandler,
+                        I just wanted to let you know that Monica and I were going to go play some paintball, you in?
+                        -- Joey"
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(config["Smtp:Server"], int.Parse(config["Smtp:Port"]), bool.Parse(config["Smtp:Ssl"]));
+
+                    // Note: only needed if the SMTP server requires authentication
+                    client.Authenticate(config["Smtp:Username"], config["Smtp:Password"]);
+
+                    client.ServerCertificateValidationCallback = (sender, certificate, chain, errors) =>
+                    {
+                        return true;
+                    };
+
+                    client.CheckCertificateRevocation = false;
+
+                    client.Send(message);
+                    client.Disconnect(true);
                 }
-
                 Console.WriteLine("E-mail sent !");
             }
             catch (Exception ex)
